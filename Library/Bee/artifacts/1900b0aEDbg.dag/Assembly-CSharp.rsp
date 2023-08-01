@@ -376,10 +376,10 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Unity/Unity 2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Unity/Unity 2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/2D Textures/Saloon/Alarm.cs"
-"Assets/2D Textures/Saloon/AlarmSystem.cs"
-"Assets/Thief/Movement.cs"
-"Assets/Thief/Thief.cs"
+"Assets/Scripts/Alarm.cs"
+"Assets/Scripts/AlarmSystem.cs"
+"Assets/Scripts/Movement.cs"
+"Assets/Scripts/Thief.cs"
 -langversion:9.0
 
 /deterministic

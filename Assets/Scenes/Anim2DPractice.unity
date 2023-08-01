@@ -422,7 +422,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 331929424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c97d1ede392dbb04b977140a8c331729, type: 3}
+  m_Script: {fileID: 11500000, guid: f4df3197aad11ea4899537a4a402288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &351723483
@@ -474,8 +474,8 @@ GameObject:
   - component: {fileID: 421668962}
   - component: {fileID: 421668965}
   - component: {fileID: 421668968}
-  - component: {fileID: 421668966}
-  - component: {fileID: 421668967}
+  - component: {fileID: 421668970}
+  - component: {fileID: 421668969}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Untagged
@@ -616,30 +616,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4885426, y: 1.3654118}
   m_EdgeRadius: 0
---- !u!114 &421668966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421668959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e449a75f7567a4fbc61a6eaf40d089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &421668967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421668959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f83091adbe7c7e4ab2108975a25f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &421668968
 Rigidbody2D:
   serializedVersion: 4
@@ -667,6 +643,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &421668969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421668959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09429130fa3e92a42aa773554619a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &421668970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421668959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8786ab03a8d6d8a4e86dbe92d16618a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &639324736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1393328838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15d92633c45281b4cb6fb443fefd589a, type: 3}
+  m_Script: {fileID: 11500000, guid: 33e34b0aa5cc29c468b3e01b86ed6dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1531822666
