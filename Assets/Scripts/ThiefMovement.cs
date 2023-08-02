@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class ThiefMovement : MonoBehaviour
 {
     private Animator _animator;
 
@@ -18,7 +16,7 @@ public class Movement : MonoBehaviour
         float coveredDistanceIdle = 0;
         float xPositionChange = coveredDistanceWalk * Time.deltaTime;
 
-        switch (isPressed) 
+        switch (isPressed)
         {
             case true:
 
@@ -29,7 +27,7 @@ public class Movement : MonoBehaviour
                     break;
                 }
                 else if (Input.GetKey(KeyCode.A))
-                { 
+                {
                     _animator.SetFloat("Speed", coveredDistanceWalk);
                     transform.Translate(-xPositionChange, 0, 0);
                     break;
