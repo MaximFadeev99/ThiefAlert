@@ -32,18 +32,20 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.E) && _isDoorOpen)
         {
-            _thief.GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-            _isThiefInside = true;
-            _alarm.ChangeVolume(_isThiefInside);
+            StartReaction(true);
         }
 
         if (Input.anyKey && _isThiefInside)
         {
-            _thief.GetComponent<SpriteRenderer>().enabled = true;
-            GetComponent<SpriteRenderer>().enabled = true;
-            _isThiefInside = false;
-            _alarm.ChangeVolume(_isThiefInside);
+            StartReaction(false);
         }
+    }
+
+    private void StartReaction(bool hasEnteredHouse) 
+    {
+        _thief.GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
+        GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
+        _isThiefInside = hasEnteredHouse;
+        _alarm.ChangeVolume(_isThiefInside);
     }
 }

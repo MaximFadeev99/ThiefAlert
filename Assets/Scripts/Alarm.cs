@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour 
 {
+    private const string ActivationBoolName = "isActive";
+
     private Coroutine _increaseVolume;
     private Coroutine _decreaseVolume;
     private AudioSource _audioSource;
-    private float _volumeChangePerFram = 0.0005f;
+    private float _volumeChangePerFrame = 0.0005f;
 
     private void Awake()
     {
@@ -20,47 +22,50 @@ public class Alarm : MonoBehaviour
     {       
         if (isThiefInside)
         {
-            if (_decreaseVolume != null)
-                StopCoroutine(_decreaseVolume);
-
-            GetComponent<Animator>().SetBool("isActive", true);
-            _increaseVolume = StartCoroutine(IncreaseVolume());
+            StopRunningCoroutine(_decreaseVolume);
+            GetComponent<Animator>().SetBool(ActivationBoolName, true);
+            IncreaseVolume();
         }
         else 
         {
-            if (_increaseVolume != null) 
-                StopCoroutine (_increaseVolume);
-
-            GetComponent<Animator>().SetBool("isActive", false);
-            _decreaseVolume = StartCoroutine(DecreaseVolume());
+            StopRunningCoroutine(_increaseVolume);
+            GetComponent<Animator>().SetBool(ActivationBoolName, false);
+            DecreaseVolume();
         }
     }
 
-    private IEnumerator IncreaseVolume()
+    private void StopRunningCoroutine(Coroutine coroutineToStop) 
+    {
+        if (coroutineToStop != null)
+            StopCoroutine(coroutineToStop);
+    }
+
+    private void IncreaseVolume()
     {
         float maxVolume = 1f;
 
         if (_audioSource.isPlaying == false) 
             _audioSource.Play();
 
-        while (_audioSource.volume < maxVolume)
-        {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, maxVolume, _volumeChangePerFram);
-            yield return null;
-        }
+        _increaseVolume = StartCoroutine(MoveVolume(maxVolume));
     }
 
-    private IEnumerator DecreaseVolume()
+    private void DecreaseVolume()
     {
         float minVolume = 0f;
 
-        while (_audioSource.volume > minVolume)
+        _decreaseVolume = StartCoroutine(MoveVolume(minVolume));
+
+        if (_audioSource.volume == minVolume)
+            _audioSource.Stop();
+    }
+
+    private IEnumerator MoveVolume(float targetVolume) 
+    {
+        while (_audioSource.volume != targetVolume)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, minVolume, _volumeChangePerFram);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _volumeChangePerFrame);
             yield return null;
         }
-
-        _audioSource.volume = minVolume;
-        _audioSource.Stop();
     }
 }
