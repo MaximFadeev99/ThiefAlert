@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour 
 {
+    [SerializeField] private Door _door;
+
     private const string ActivationBoolName = "isActive";
 
     private Coroutine _increaseVolume;
@@ -18,18 +20,24 @@ public class Alarm : MonoBehaviour
         _audioSource.volume = initialVolume;
     }
 
+    private void OnEnable()
+    {
+        _door.OnEntered += ChangeVolume;
+    }
+
+    private void OnDisable()
+    {
+        _door.OnEntered -= ChangeVolume;
+    }
+
     public void ChangeVolume(bool isThiefInside) 
-    {       
+    {               
         if (isThiefInside)
         {
-            StopRunningCoroutine(_decreaseVolume);
-            GetComponent<Animator>().SetBool(ActivationBoolName, true);
             IncreaseVolume();
         }
         else 
         {
-            StopRunningCoroutine(_increaseVolume);
-            GetComponent<Animator>().SetBool(ActivationBoolName, false);
             DecreaseVolume();
         }
     }
@@ -44,6 +52,9 @@ public class Alarm : MonoBehaviour
     {
         float maxVolume = 1f;
 
+        StopRunningCoroutine(_decreaseVolume);
+        GetComponent<Animator>().SetBool(ActivationBoolName, true);
+
         if (_audioSource.isPlaying == false) 
             _audioSource.Play();
 
@@ -54,6 +65,8 @@ public class Alarm : MonoBehaviour
     {
         float minVolume = 0f;
 
+        StopRunningCoroutine(_increaseVolume);
+        GetComponent<Animator>().SetBool(ActivationBoolName, false);
         _decreaseVolume = StartCoroutine(MoveVolume(minVolume));
 
         if (_audioSource.volume == minVolume)

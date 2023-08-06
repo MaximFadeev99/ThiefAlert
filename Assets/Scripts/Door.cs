@@ -1,16 +1,16 @@
+using System;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    public Action<bool> OnEntered;
     private Thief _thief;
-    private Alarm _alarm;
     private bool _isDoorOpen;
     private bool _isThiefInside;
 
     private void Awake()
     {
         GetComponent<SpriteRenderer>().enabled = false;
-        _alarm = FindAnyObjectByType<Alarm>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +46,8 @@ public class Door : MonoBehaviour
         _thief.GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
         GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
         _isThiefInside = hasEnteredHouse;
-        _alarm.ChangeVolume(_isThiefInside);
+        //_alarm.ChangeVolume(_isThiefInside);
+        OnEntered.Invoke(_isThiefInside);
     }
 }
+
