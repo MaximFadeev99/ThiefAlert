@@ -1,21 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
+
 public class Alarm : MonoBehaviour 
 {
     [SerializeField] private Door _door;
 
-    private const string ActivationBoolName = "isActive";
+    private readonly int IsActive = Animator.StringToHash(nameof(IsActive));
 
     private Coroutine _increaseVolume;
     private Coroutine _decreaseVolume;
     private AudioSource _audioSource;
+    private Animator _animator;
     private float _volumeChangePerFrame = 0.0005f;
 
     private void Awake()
     {
         float initialVolume = 0f;
 
+        _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = initialVolume;
     }
@@ -53,7 +58,7 @@ public class Alarm : MonoBehaviour
         float maxVolume = 1f;
 
         StopRunningCoroutine(_decreaseVolume);
-        GetComponent<Animator>().SetBool(ActivationBoolName, true);
+        _animator.SetBool(IsActive, true);
 
         if (_audioSource.isPlaying == false) 
             _audioSource.Play();
@@ -66,7 +71,7 @@ public class Alarm : MonoBehaviour
         float minVolume = 0f;
 
         StopRunningCoroutine(_increaseVolume);
-        GetComponent<Animator>().SetBool(ActivationBoolName, false);
+        _animator.SetBool(IsActive, false);
         _decreaseVolume = StartCoroutine(MoveVolume(minVolume));
 
         if (_audioSource.volume == minVolume)

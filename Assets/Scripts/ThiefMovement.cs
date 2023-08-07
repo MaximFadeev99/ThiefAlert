@@ -1,7 +1,11 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Animator))]
+
 public class ThiefMovement : MonoBehaviour
 {
+    private readonly int Speed = Animator.StringToHash(nameof(Speed));
+
     private Animator _animator;
 
     private void Awake()
@@ -22,13 +26,13 @@ public class ThiefMovement : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.D))
                 {
-                    _animator.SetFloat("Speed", coveredDistanceWalk);
+                    _animator.SetFloat(Speed, coveredDistanceWalk);
                     transform.Translate(xPositionChange, 0, 0);
                     break;
                 }
                 else if (Input.GetKey(KeyCode.A))
                 {
-                    _animator.SetFloat("Speed", coveredDistanceWalk);
+                    _animator.SetFloat(Speed, coveredDistanceWalk);
                     transform.Translate(-xPositionChange, 0, 0);
                     break;
                 }
@@ -36,7 +40,7 @@ public class ThiefMovement : MonoBehaviour
                 break;
 
             case false:
-                _animator.SetFloat("Speed", coveredDistanceIdle);
+                _animator.SetFloat(Speed, coveredDistanceIdle);
                 break;
         }
     }

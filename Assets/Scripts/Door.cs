@@ -1,30 +1,35 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+
 public class Door : MonoBehaviour
 {
     public Action<bool> OnEntered;
+
+    private SpriteRenderer _spriteRenderer;
     private Thief _thief;
     private bool _isDoorOpen;
     private bool _isThiefInside;
 
     private void Awake()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out _thief)) 
         {
-            GetComponent<SpriteRenderer>().enabled = true;
+            _spriteRenderer.enabled = true;
             _isDoorOpen = true;
         }        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        _spriteRenderer.enabled = false;
         _isDoorOpen = false;
     }
 
@@ -32,21 +37,20 @@ public class Door : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.E) && _isDoorOpen)
         {
-            StartReaction(true);
+            RegisterBreakIn(true);
         }
 
         if (Input.anyKey && _isThiefInside)
         {
-            StartReaction(false);
+            RegisterBreakIn(false);
         }
     }
 
-    private void StartReaction(bool hasEnteredHouse) 
+    private void RegisterBreakIn(bool hasEnteredHouse) 
     {
         _thief.GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
-        GetComponent<SpriteRenderer>().enabled = !hasEnteredHouse;
+        _spriteRenderer.enabled = !hasEnteredHouse;
         _isThiefInside = hasEnteredHouse;
-        //_alarm.ChangeVolume(_isThiefInside);
         OnEntered.Invoke(_isThiefInside);
     }
 }
